@@ -1,0 +1,30 @@
+{
+  "name": "sandbox-web",
+  "version": "0.0.1",
+  "description": "The web client of the sandbox mode of Particle Chat.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saeedafzal/sandbox-web.git"
+  },
+  "author": "Saeed Afzal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saeedafzal/sandbox-web/issues"
+  },
+  "homepage": "https://github.com/saeedafzal/sandbox-web#readme",
+  "dependencies": {
+    "mithril": "^2.2.14"
+  },
+  "devDependencies": {
+    "@types/mithril": "^2.2.7",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.1"
+  }
+}
