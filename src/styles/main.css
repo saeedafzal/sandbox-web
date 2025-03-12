@@ -1,6 +1,6 @@
 @import "button";
 @import "bubble";
-@import "sandbox";
+@import "chat";
 
 /* Core Styles */
 *, :after, :before, ::backdrop {

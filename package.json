@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest --silent --run tests",
+    "test:watch": "vitest tests",
     "build": "tsc && vite build"
   },
   "repository": {
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/mithril": "^2.2.7",
     "typescript": "^5.8.2",
-    "vite": "^6.2.1"
+    "vite": "^6.2.1",
+    "vitest": "^3.0.8"
   }
 }

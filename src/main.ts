@@ -1,5 +1,6 @@
 import m from "mithril";
 import EventBus from "./core/eventbus";
+import Container from "./core/container";
 import SandboxView from "./views/sandboxview";
 import SandboxModel from "./models/sandboxmodel";
 import "./styles/main.css";
@@ -15,6 +16,7 @@ if (environment === "production") {
 
 // Initialising
 const eventbus = new EventBus();
+Container.register(eventbus);
 
 // Initialise client routes
 m.route.prefix = "";

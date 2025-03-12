@@ -19,7 +19,7 @@ export default class EventBus {
         }
 
         this.subscriptions[event].forEach(subscription => {
-            subscription.callback(subscription.context, ...args);
+            subscription.callback.call(subscription.context, ...args);
         });
     }
 }
