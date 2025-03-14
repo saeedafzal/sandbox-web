@@ -1,8 +1,13 @@
 import m from "mithril";
+import Component from "../core/component";
+import SandboxModel from "../models/sandboxmodel";
 
-export default function SandboxView() {
+export default class SandboxView extends Component<SandboxModel> {
 
-    const view = () => {
+    /**
+     * @override
+     */
+    view() {
         return m("#root.sandbox", [
             m("nav", [
                 m("div", [
@@ -18,8 +23,8 @@ export default function SandboxView() {
             m(".container", [
                 m(".chat", [
                     m(".chat-history", [
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
+                        this.model.messages.map(msg => m(".bubble", [
+                            m(".bubble-avatar", msg.sender[0]),
                             m(".bubble-container", [
                                 m(".bubble-head", [
                                     m("strong", "Sender"),
@@ -27,117 +32,7 @@ export default function SandboxView() {
                                 ]),
                                 m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
                             ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "Reiciendis aut neque laboriosam cupiditate commodi aperiam. Quisquam ab maiores iusto est officiis a. Assumenda qui modi nisi. Officiis sed quos sunt provident maxime velit minima. Velit et sequi aut voluptatem mollitia accusamus praesentium.")
-                            ])
-                        ]),
-                        m(".bubble", [
-                            m(".bubble-avatar", "S"),
-                            m(".bubble-container", [
-                                m(".bubble-head", [
-                                    m("strong", "Sender"),
-                                    m("small", "0:00 AM"),
-                                ]),
-                                m("div", "The actual message body.")
-                            ])
-                        ])
+                        ]))
                     ]),
                     m("aside", [
                         m("h3", "User List"),
@@ -155,7 +50,5 @@ export default function SandboxView() {
                 ])
             ])
         ]);
-    };
-
-    return { view };
+    }
 }
