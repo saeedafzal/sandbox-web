@@ -1,5 +1,6 @@
 @import "button";
 @import "bubble";
+@import "loader";
 @import "chat";
 
 /* Core Styles */
@@ -12,7 +13,7 @@ body {
     line-height: 1.5;
 }
 
-body, h3 {
+body, h1, h3 {
     margin: 0;
 }
 

@@ -5,7 +5,7 @@ import ChatModel from "../models/chatmodel";
 export default class ChatView extends Component<ChatModel> {
 
     override view() {
-        return m("#root.sandbox", [
+        return m("#root.chat", [
             m("nav", [
                 m("div", [
                     m("h3", "Sandbox"),

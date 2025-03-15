@@ -4,6 +4,6 @@ import Component from "../core/component";
 export default class LoaderView extends Component {
 
     override view() {
-        return m("div", "Loading");
+        return m("#root.loader", m(".spinner"));
     }
 }
