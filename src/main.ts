@@ -1,25 +1,14 @@
-import m from "mithril";
-import EventBus from "./core/eventbus";
-import Container from "./core/container";
-import SandboxView from "./views/sandboxview";
-import SandboxModel from "./models/sandboxmodel";
-import "./styles/main.css";
+import { mount } from "svelte";
+import Sandbox from "$src/views/sandbox.svelte";
 
 // Print application information
 const environment = import.meta.env.MODE;
 console.log(`Sandbox | ${import.meta.env.VITE_VERSION} | ${environment}`);
 
-// Disable debug logs
+// Disable debug logs in production
 if (environment === "production") {
     console.debug = () => undefined;
 }
 
-// Initialising
-const eventbus = new EventBus();
-Container.register(eventbus);
-
-// Initialise client routes
-m.route.prefix = "";
-m.route(document.body, "/", {
-    "/": { render: _ => m(SandboxView, { model: new SandboxModel(eventbus) }) }
-});
+// Render
+export default mount(Sandbox, { target: document.body });

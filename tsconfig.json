@@ -5,18 +5,18 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "useDefineForClassFields": true,
     "moduleDetection": "force",
-    "allowImportingTsExtensions": true,
+    // "allowImportingTsExtensions": true,
 
     /* Modules */
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "baseUrl": "./src",
-    "paths": {},
-    "types": ["vite/client"],
+    "baseUrl": ".",
+    "paths": { "$src": ["./src"] },
+    "types": ["vite/client", "svelte"],
 
     /* JavaScript Support */
-    "allowJs": true,
-    "checkJs": true,
+    // "allowJs": true,
+    // "checkJs": true,
 
     /* Emit */
     "noEmit": true,
@@ -34,5 +34,5 @@
     /* Completeness */
     "skipLibCheck": true
   },
-  "include": ["src", "tests"]
+  "include": ["src"]
 }
