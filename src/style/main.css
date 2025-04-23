@@ -1,0 +1,26 @@
+/* Core */
+:root {
+    color-scheme: light dark;
+}
+
+*, :after, :before, ::backdrop {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.5;
+    color-scheme: light;
+}
+
+body, h1, h3 {
+    margin: 0;
+}
+
+#root {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: light-dark(#f1f5f9, #111827);
+    color: light-dark(#020617, aliceblue);
+}
