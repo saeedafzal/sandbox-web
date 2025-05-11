@@ -1,4 +1,4 @@
-type Callback = (...args: unknown[]) => void;
+type Callback = (...args: any[]) => void;
 
 interface Subscription {
     callback: Callback;
@@ -8,21 +8,31 @@ interface Subscription {
 export default class EventBus {
 
     private readonly subs: Record<string, Subscription[]> = {};
+    private readonly queue: Record<string, unknown[]> = {};
 
     subscribe(event: string, callback: Callback, context: unknown): void {
         this.subs[event] = this.subs[event] || [];
         this.subs[event].push({ callback, context });
+
+        const args = this.queue[event];
+        if (args) {
+            callback.call(context, ...args);
+            delete this.queue[event];
+        }
     }
 
     publish(event: string, ...args: unknown[]): void {
-        const subs = this.subs[event];
-        if (!subs) {
-            return;
-        }
+        console.debug(`[EventBus] Publishing event: ${event}`);
 
-        subs.forEach(({ callback, context }) => {
-            callback.call(context, ...args);
-        });
+        const subs = this.subs[event];
+
+        if (!subs) {
+            this.queue[event] = args;
+        } else {
+            subs.forEach(({ callback, context }) => {
+                callback.call(context, ...args);
+            });
+        }
     }
 
     unsubscribe(event: string, context: unknown): void {

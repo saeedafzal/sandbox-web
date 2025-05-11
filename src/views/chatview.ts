@@ -1,8 +1,14 @@
 import m from "mithril";
 import AbstractComponent from "@/core/abstractcomponent";
 import ChatModel from "@/models/chatmodel";
+import Bubble from "@/components/bubble";
 
 export default class ChatView extends AbstractComponent<ChatModel> {
+
+    override oncreate() {
+        super.oncreate();
+        this.model.nameDialog = document.getElementById("name-dialog") as HTMLDialogElement;
+    }
 
     override view() {
         return m("main", [
@@ -26,19 +32,33 @@ export default class ChatView extends AbstractComponent<ChatModel> {
                 // Chat content
                 m("div", [
                     // Chat history
-                    m("div"),
+                    m(".chat-history", [ this.model.messages.map(msg => m(Bubble, msg)) ]),
 
                     // Editor
                     m("div", [
-                        m("[contenteditable][placeholder=Enter message...]"),
-                        m("button", "Send")
+                        m("[contenteditable=false][placeholder=Enter message...]"),
+                        m("button[disabled]", "Send")
                     ])
                 ]),
 
                 // Sidebar
                 m("aside", [
                     m("h3", "User List"),
-                    m("ul")
+                    m("ul", [ this.model.userList.map(user => m("li", user)) ])
+                ])
+            ]),
+
+            // Name dialog
+            m("dialog#name-dialog", [
+                m("form", [
+                    m("h3", "Set Name"),
+                    m("fieldset", [
+                        m("input[required][name=name-input]"),
+                        m("div", [
+                            m("button", "Cancel"),
+                            m("button", "Set Name")
+                        ])
+                    ])
                 ])
             ])
         ]);

@@ -34,5 +34,5 @@
     /* Completeness */
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src", "e2e"]
 }

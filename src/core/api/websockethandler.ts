@@ -11,6 +11,7 @@ export default class WebSocketHandler {
     connect() {
         const ws = new WebSocket(import.meta.env.VITE_WEBSOCKET_URL);
         ws.onopen = () => this.open();
+        ws.onmessage = e => this.message(e);
         ws.onclose = this.close;
         ws.onerror = this.error;
     }
@@ -18,6 +19,23 @@ export default class WebSocketHandler {
     private open(): void {
         console.log("[WS] Websocket connected.");
         this.eventbus.publish("ws.connected");
+    }
+
+    private message(e: MessageEvent): void {
+        console.debug(`[WS] Received websocket message: ${e.data}`);
+
+        const data = JSON.parse(e.data);
+
+        switch (data["type"]) {
+            case "initial":
+                this.eventbus.publish("ws.users", data.users);
+                break;
+            case "message":
+                this.eventbus.publish("ws.message", data);
+                break;
+            default:
+                console.error("Did not receive a valid websocket payload.");
+        }
     }
 
     private close({ code, reason, wasClean }: CloseEvent): void {

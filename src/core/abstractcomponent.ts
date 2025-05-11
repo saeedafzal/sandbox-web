@@ -15,5 +15,5 @@ export default abstract class AbstractComponent<M extends AbstractModel = Abstra
         this.model?.init?.();
     }
 
-    abstract view(): Children;
+    abstract view(vnode: Vnode<A>): Children;
 }

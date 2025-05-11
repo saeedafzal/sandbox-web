@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc && vite build",
     "start": "vite dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "repository": {
     "type": "git",
@@ -22,8 +24,9 @@
     "mithril": "^2.2.15"
   },
   "devDependencies": {
+    "@playwright/test": "^1.52.0",
     "@types/mithril": "^2.2.7",
     "typescript": "^5.8.3",
-    "vite": "^6.3.2"
+    "vite": "^6.3.5"
   }
 }
