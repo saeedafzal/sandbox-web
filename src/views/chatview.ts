@@ -1,35 +1,23 @@
 import m from "mithril";
 import AbstractComponent from "@/core/abstractcomponent";
+import Container from "@/core/container";
 import ChatModel from "@/models/chatmodel";
 import Bubble from "@/components/bubble";
+import Dialog from "@/components/dialog";
+import TopBar from "@/components/topbar";
+import TopBarModel from "@/models/topbarmodel";
+import DialogModel from "@/models/dialogmodel";
 
 export default class ChatView extends AbstractComponent<ChatModel> {
 
-    override oncreate() {
-        super.oncreate();
-        this.model.nameDialog = document.getElementById("name-dialog") as HTMLDialogElement;
-    }
-
     override view() {
-        return m("main", [
-            // Top bar
-            m("nav", [
-                m("div", [
-                    m("h3", "Sandbox"),
-                    m("button", {
-                        onclick: () => this.model.toggleNameModal()
-                    }, "Set Name")
-                ]),
-                m("div", [
-                    m("button", "Clear"),
-                    m("button", "User List"),
-                    m("button", "Theme")
-                ])
-            ]),
+        const topBarModel = Container.resolve(TopBarModel);
+        const dialogModel = Container.resolve(DialogModel);
 
-            // Container
+        return m("main", [
+            m(TopBar, { model: topBarModel }),
+
             m("div", [
-                // Chat content
                 m("div", [
                     // Chat history
                     m(".chat-history", [ this.model.messages.map(msg => m(Bubble, msg)) ]),
@@ -41,26 +29,15 @@ export default class ChatView extends AbstractComponent<ChatModel> {
                     ])
                 ]),
 
-                // Sidebar
+                // Sidebar user list
                 m("aside", [
                     m("h3", "User List"),
                     m("ul", [ this.model.userList.map(user => m("li", user)) ])
                 ])
             ]),
 
-            // Name dialog
-            m("dialog#name-dialog", [
-                m("form", [
-                    m("h3", "Set Name"),
-                    m("fieldset", [
-                        m("input[required][name=name-input]"),
-                        m("div", [
-                            m("button", "Cancel"),
-                            m("button", "Set Name")
-                        ])
-                    ])
-                ])
-            ])
+            // Set nickname dialog
+            m(Dialog, { model: dialogModel })
         ]);
     }
 }

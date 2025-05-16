@@ -1,14 +1,14 @@
 import { test, expect } from "@playwright/test";
 
-test("should display loading screen on page load", async ({ page }) => {
+test("should display loading view on page load", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle("Sandbox - Particle Chat");
 
+    await expect(page).toHaveTitle("Sandbox - Particle Chat");
     await expect(page.getByRole("img")).toBeVisible();
 });
 
-test("should display chat on websocket connect", async ({ page }) => {
-    await page.routeWebSocket("ws://localhost:8080/stream", () => {});
+test("should display chat view on websocket connect", async ({ page }) => {
+    await page.routeWebSocket("ws://*/stream", () => {});
 
     await page.goto("/");
 
@@ -24,7 +24,7 @@ test("should display chat on websocket connect", async ({ page }) => {
 test("should render user list on websocket payload", async ({ page }) => {
     const users = ["person1", "person2", "person3"];
 
-    await page.routeWebSocket("ws://localhost:8080/stream", ws => {
+    await page.routeWebSocket("ws://*/stream", ws => {
         ws.send(JSON.stringify({ type: "initial", users }));
     });
 
@@ -34,7 +34,7 @@ test("should render user list on websocket payload", async ({ page }) => {
     await expect(page.getByRole("listitem")).toHaveText(users);
 });
 
-test("should render message bubble on websocket message", async ({ page }) => {
+test("should render message bubble on websocket payload", async ({ page }) => {
     const message = {
         type: "message",
         sender: "hello",
@@ -42,7 +42,7 @@ test("should render message bubble on websocket message", async ({ page }) => {
         timestamp: 1746998380134
     };
 
-    await page.routeWebSocket("ws://localhost:8080/stream", ws => {
+    await page.routeWebSocket("ws://*/stream", ws => {
         ws.send(JSON.stringify(message));
     });
 
@@ -59,5 +59,3 @@ test("should render message bubble on websocket message", async ({ page }) => {
     await expect(bubble.getByRole("time")).toHaveText("10:19 PM");
     await expect(bubble.getByText("This is a message.", { exact: true })).toBeVisible();
 });
-
-// TODO (Continue): Setting nickname

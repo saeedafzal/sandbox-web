@@ -8,8 +8,6 @@ interface SingleMessage {
 
 export default class ChatModel extends AbstractModel {
 
-    nameDialog!: HTMLDialogElement;
-
     userList: string[] = [];
     messages: SingleMessage[] = [];
 
@@ -18,15 +16,12 @@ export default class ChatModel extends AbstractModel {
         this.eventbus.subscribe("ws.message", this.messageCallback, this);
     }
 
-    toggleNameModal(): void {
-        console.debug("Toggling name dialog.");
-        !this.nameDialog.open ?
-            this.nameDialog.showModal() :
-            this.nameDialog.close();
+    toggleDialog(): void {
+        this.eventbus.publish("ui.dialog.toggle");
     }
 
     private userListCallback(userList: string[]): void {
-        this.userList = userList;
+        this.userList = userList || [];
         this.redraw();
     }
 
