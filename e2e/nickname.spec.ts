@@ -2,16 +2,6 @@ import { test, expect, Page, Locator } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
     await page.routeWebSocket("ws://*/stream", () => {});
-
-    await page.route("**/nickname", async route => {
-        if (route.request().postData()?.includes("hoo-hah")) {
-            await route.fulfill({
-                status: 400,
-                body: "Nickname hoo-hah is already taken."
-            });
-        }
-    });
-
     await page.goto("/");
 
     // Wait for chat view
@@ -26,24 +16,17 @@ test("should hide dialog when pressing cancel", async ({ page }) => {
     expect(dialog).not.toBeVisible();
 });
 
-test("should display alert on dialog if nickname is taken", async ({ page }) => {
-    await page.route("**/nickname", route => route.fulfill({
-        status: 400,
-        body: "Nickname hoo-hah is already taken."
-    }));
+// TODO: No token - don't even send request
 
-    await fillInNicknameDialog(page, "hoo-hah");
-    await expect(page.locator(".alert")).toHaveText("Nickname hoo-hah is already taken.");
-});
-
-test("should display alert on dialog on server error", async ({ page }) => {
-    await page.route("**/nickname", route => route.fulfill({
-        status: 500,
-        body: "Unexpected error."
-    }));
-
-    await fillInNicknameDialog(page, "hoo-hah");
-    await expect(page.locator(".alert")).toHaveText("Unexpected error.");
+[
+    { data: { status: 400, body: "Nickname hoo-hah is already taken." }, expected: "Nickname hoo-hah is already taken." },
+    { data: { status: 500, body: "Unexpected error." }, expected: "Unexpected error." }
+].forEach(({ data, expected }) => {
+    test(`should display alert on ${data.status} response`, async ({ page }) => {
+        await page.route("**/nickname", route => route.fulfill(data));
+        await fillInNicknameDialog(page, "hoo-hah");
+        await expect(page.locator(".alert")).toHaveText(expected);
+    });
 });
 
 test("should be able to set a valid nickname", async ({ page }) => {
